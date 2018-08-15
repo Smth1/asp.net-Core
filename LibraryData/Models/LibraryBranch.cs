@@ -16,7 +16,7 @@ namespace LibraryData.Models
     	public string Address { get; set; }
 
     	[Required]
-    	public string Telehpone { get; set; }
+    	public string Telephone { get; set; }
     	public string Description { get; set; }
     	public DateTime OpenDate { get; set; }
 

@@ -10,6 +10,7 @@ namespace LibraryData
     {
         public LibraryContext(DbContextOptions options) : base(options) { }
 
+        public DbSet<Book> Books { get; set; }
         public DbSet<Patron> Patrons { get; set; }
         public DbSet<Video> Videos { get; set; }
         public DbSet<Checkout> Checkouts { get; set; }
@@ -20,5 +21,7 @@ namespace LibraryData
         public DbSet<Status> Statuses { get; set; }
         public DbSet<LibraryAsset> LibraryAssets { get; set; }
         public DbSet<Hold> Holds { get; set; }
+        
+
     }
 }

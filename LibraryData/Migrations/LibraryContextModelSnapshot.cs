@@ -161,7 +161,7 @@ namespace LibraryData.Migrations
 
                     b.Property<DateTime>("OpenDate");
 
-                    b.Property<string>("Telehpone")
+                    b.Property<string>("Telephone")
                         .IsRequired();
 
                     b.HasKey("Id");
@@ -196,9 +196,9 @@ namespace LibraryData.Migrations
 
                     b.Property<string>("FirstName");
 
-                    b.Property<string>("LastName");
+                    b.Property<int?>("HomeLibraryBranchId");
 
-                    b.Property<int?>("LibraryBranchId");
+                    b.Property<string>("LastName");
 
                     b.Property<int?>("LibraryCardId");
 
@@ -206,7 +206,7 @@ namespace LibraryData.Migrations
 
                     b.HasKey("Id");
 
-                    b.HasIndex("LibraryBranchId");
+                    b.HasIndex("HomeLibraryBranchId");
 
                     b.HasIndex("LibraryCardId");
 
@@ -228,6 +228,24 @@ namespace LibraryData.Migrations
                     b.HasKey("Id");
 
                     b.ToTable("Statuses");
+                });
+
+            modelBuilder.Entity("LibraryData.Models.Book", b =>
+                {
+                    b.HasBaseType("LibraryData.Models.LibraryAsset");
+
+                    b.Property<string>("Author")
+                        .IsRequired();
+
+                    b.Property<string>("DeweyIndex")
+                        .IsRequired();
+
+                    b.Property<string>("ISBN")
+                        .IsRequired();
+
+                    b.ToTable("Book");
+
+                    b.HasDiscriminator().HasValue("Book");
                 });
 
             modelBuilder.Entity("LibraryData.Models.Video", b =>
@@ -299,9 +317,9 @@ namespace LibraryData.Migrations
 
             modelBuilder.Entity("LibraryData.Models.Patron", b =>
                 {
-                    b.HasOne("LibraryData.Models.LibraryBranch", "LibraryBranch")
+                    b.HasOne("LibraryData.Models.LibraryBranch", "HomeLibraryBranch")
                         .WithMany("Patrons")
-                        .HasForeignKey("LibraryBranchId");
+                        .HasForeignKey("HomeLibraryBranchId");
 
                     b.HasOne("LibraryData.Models.LibraryCard", "LibraryCard")
                         .WithMany()
